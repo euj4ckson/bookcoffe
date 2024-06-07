@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookCoffee</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="img/favicon-coffee.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    
+      <!-- HEADER -->
+      <nav
+        class="navbar navbar-expand-lg navbar-dark"
+        style="background-color: #3a2d27"
+      >
+        <div class="container">
+          <div class="md-2">
+            <button
+              onclick="statusMenu()"
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              style="color: #d4c0a8"
+            >
+              <span class="navbarIcon"
+                ><img src="img/closed-book.png" alt="icone-span" width="30px"
+              /></span>
+            </button>
+          </div>
+          <div class="md-8">
+            <a class="navbar-brand" id="logo">Book Coffee</a>
+          </div>
+          <div class="md-2">
+            <a href="login.php"
+              ><img src="img/sair.png" alt="Sair da conta" height="25px"
+            /></a>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  style="color: #d4c0a8"
+                  >Bem vindo(a), <span class="usuario">Camila</span>!</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="color: #d4c0a8"
+                  >RECURSOS PREMIUM: R$19,90/mês</a
+                >
+                <ul class="dropdown-menu" style="background-color: #d4c0a8">
+                  <li><a class="dropdown-item">CONTROLE DE ESTOQUE</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">RELATÓRIO DE VENDAS</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">DELIVERY</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">RESERVA DE MESAS</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">REGISTRO DE COMANDAS</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">PEDIDOS RÁPIDOS</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">PRODUTOS EM DESTAQUE</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item">ACESSO ÚNICO DE FUNCIONÁRIOS</a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">ACRESCENTAR NOVAS MESAS</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">EDITAR PRODUTOS E PREÇOS</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item">ALTERAR LAYOUT DA PLATAFORMA</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: #d4c0a8"
+                  >SALDO DO CAIXA: R$ <span class="saldo">0.00</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- MODAL -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content" style="background-color: #e9c59e">
+            <div class="modal-header">
+              <div class="col-2"></div>
+              <div class="col-8 tituloModal">
+                <h5 class="modal-title" id="exampleModalLabel">Título modal</h5>
+              </div>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div
+              class="alert alert-warning alert-dismissible fade show"
+              role="alert"
+            >Ocupe a mesa no botão abaixo para adicionar produtos na comanda
+            </div>
+            <div class="modal-body" id="listaProdutos">
+              <div class="acordeoes">
+                <!-- Acordeão 1+2 -->
+                <div class="accordion accordion-flush"
+                  id="accordionFlushExample1">
+                  <!-- Acordeão café -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                      <button id="acordeaobtn"
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseOne"
+                      >CAFÉS</button>
+                    </h2>
+                    <div
+                      id="flush-collapseOne"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingOne"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body" id="cafes-acc">
+                        <!-- Carrossel cafés -->
+                        <div
+                          id="carouselExampleCaptions"
+                          class="carousel slide"
+                          data-bs-ride="carousel"
+                        >
+                          <div class="carousel-indicators">
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="0"
+                              class="active"
+                              aria-current="true"
+                              aria-label="Slide 1"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="1"
+                              aria-label="Slide 2"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 3"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 4"
+                            ></button>
+                          </div>
+                          <div class="carousel-inner" background="linear-gradient(
+                            rgba(0,0,0,.8),rgba(0,0,0,.8)
+                            )">
+                            <div class="carousel-item active">
+                              <img
+                                src="img/001.png"
+                                class="d-block w-100"
+                                alt="Café expresso"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Quixote</h5>
+                                <p>Café expresso</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/002.png"
+                                class="d-block w-100"
+                                alt="Mocha"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Pedro Bala</h5>
+                                <p>Mocha</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/003.png"
+                                class="d-block w-100"
+                                alt="Cappuccino"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Iracema</h5>
+                                <p>Cappuccino</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/004.png"
+                                class="d-block w-100"
+                                alt="Latte Macchiato"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Brás Cuba</h5>
+                                <p>Latte Macchiato</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Acordeão bebidas -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseTwo"
+                      >
+                        BEBIDAS
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseTwo"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingTwo"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body" id="bebidas-acc">
+                        <!-- Carrossel bebidas -->
+                        <div
+                          id="carouselExampleCaptions"
+                          class="carousel slide"
+                          data-bs-ride="carousel"
+                        >
+                          <div class="carousel-indicators">
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="0"
+                              class="active"
+                              aria-current="true"
+                              aria-label="Slide 1"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="1"
+                              aria-label="Slide 2"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 3"
+                            ></button>
+                          </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img
+                                src="img/101.png"
+                                class="d-block w-100"
+                                alt="Chá gelado"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Escobar</h5>
+                                <p>Chá gelado</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/102.png"
+                                class="d-block w-100"
+                                alt="Suco natural"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Capitu</h5>
+                                <p>Suco natural</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/103.png"
+                                class="d-block w-100"
+                                alt="Chocolate quente"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Bentinho</h5>
+                                <p>Chocolate quente</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="acordeoes">
+                <!-- Acordeão 3+4 -->
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                  <!-- Acordeão bolos -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTree">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTree"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseTree"
+                      >BOLOS
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseTree"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingTree"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body" id="bolos-acc">
+                        <!-- Carrossel bolos -->
+                        <div
+                          id="carouselExampleCaptions"
+                          class="carousel slide"
+                          data-bs-ride="carousel"
+                        >
+                          <div class="carousel-indicators">
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="0"
+                              class="active"
+                              aria-current="true"
+                              aria-label="Slide 1"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="1"
+                              aria-label="Slide 2"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 3"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 4"
+                            ></button>
+                          </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img
+                                src="img/201.png"
+                                class="d-block w-100"
+                                alt="Bolo indiano"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Emília</h5>
+                                <p>Bolo indiano</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/202.png"
+                                class="d-block w-100"
+                                alt="Bolo de Banana"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Narizinho</h5>
+                                <p>Bolo de Banana</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/203.png"
+                                class="d-block w-100"
+                                alt="Bolo de laranja"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Dona Benta</h5>
+                                <p>Bolo de laranja</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/204.png"
+                                class="d-block w-100"
+                                alt="Bolo de chocolate"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Pedrinho</h5>
+                                <p>Bolo de chocolate</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Acordeão salgados -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFour"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseFour"
+                      >
+                        SALGADOS
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseFour"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingFour"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body" id="salgados-acc">
+                        <!-- Carrossel salgados -->
+                        <div
+                          id="carouselExampleCaptions"
+                          class="carousel slide"
+                          data-bs-ride="carousel"
+                        >
+                          <div class="carousel-indicators">
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="0"
+                              class="active"
+                              aria-current="true"
+                              aria-label="Slide 1"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="1"
+                              aria-label="Slide 2"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 3"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 4"
+                            ></button>
+                            <button
+                              type="button"
+                              data-bs-target="#carouselExampleCaptions"
+                              data-bs-slide-to="2"
+                              aria-label="Slide 5"
+                            ></button>
+                          </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img
+                                src="img/301.png"
+                                class="d-block w-100"
+                                alt="Coxinha"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Armandinho</h5>
+                                <p>Coxinha</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/302.png"
+                                class="d-block w-100"
+                                alt="Empada"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Mônica</h5>
+                                <p>Empada</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/303.png"
+                                class="d-block w-100"
+                                alt="Enroladinho"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Junião</h5>
+                                <p>Enroladinho</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/304.png"
+                                class="d-block w-100"
+                                alt="Cigarrete"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>O menino maluquinho</h5>
+                                <p>Cigarrete</p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img
+                                src="img/305.png"
+                                class="d-block w-100"
+                                alt="Quibe"
+                              />
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Henfil</h5>
+                                <p>Quibe</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="dropup">
+                <button class="dropbtn btn-*" onmouseover="precoTotal()">TOTAL</button>
+                <div class="dropup-content">
+                  <span id="dropup2"></span>
+                  <span id="dropup"></span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="botaoStatus"
+                onclick="statusMesa(this.id)"
+              >OCUPAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container completo">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="mapaMesas col-10"></div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+body{
+    font-family:'Montserrat', sans-serif;
+	font-weight: bold;
+	color:#66280a;
+	background:  linear-gradient(
+		rgba(0,0,0,.5),rgba(0,0,0,.5)
+	  ),url(img/coffee-bg.jpg);
+	overflow: hidden;
+}
+
+.telalogin{
+    text-align: center;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.login{
+	color: #ffd7ab;
+	background: #38261d;
+	border: 2px solid #ffd7ab;
+	border-radius: 10px;
+	padding: 15px;
+}
+input[type=text],input[type=password]{
+    height: 20px;
+    align-self: center;
+    text-align: center;
+    color: #ffd7ab;
+    border-radius: 10px;
+    background: #2e2320;
+    border: 1px solid #ffd7ab;
+}
+.btnLogin{
+	background-color: #5f4a44;
+	border: 1px solid transparent;
+	color: white;
+	font-size: 14px;
+	border: none;
+	height: 35px;
+	border-radius: 6px;
+}
+a{
+	background-color: #5f4a44;
+	border: 1px solid transparent;
+	color: white;
+	font-size: 14px;
+	border: none;
+	height: 35px;
+	border-radius: 6px;
+	
+}
+a:hover{
+	background-color: #2e2320;
+	border: 1px solid #ffd7ab;
+	color: #ffd7ab;
+}
+.btnLogin:hover{
+	background-color: #2e2320;
+	border: 1px solid #ffd7ab;
+	color: #ffd7ab;
+}
+.telalogin{
+	visibility: visible;
+	/* visibility: hidden; */
+}
+.telainicial{
+	/* visibility: visible; */
+	visibility: hidden;
+}
+#logo{
+	font-family: 'Marck Script', cursive;
+	color: #e6e0df;
+	font-size: 30px;
+	text-shadow: 5px 5px #2e241f;
+}
+.navbar-toggler:hover{
+	background: #221b18;
+}
+.nav-item{
+	display: flex;
+	flex-flow: row wrap;
+}
+.dropdown-item{
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+}
+.dropdown-item:hover{
+	background: none;
+}
+.completo{
+	height: 100vh;
+	max-width: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.mapaMesas{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+}
+#exampleModalLabel{
+	color:#461d09;
+	font-weight: bold;
+	font-size: 20px;
+}
+.tituloModal{
+	text-align: center;
+}
+.modal-footer,.modal-header{
+	border: none;
+}
+.modal-body{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-evenly;
+}
+.acordeoes{
+	min-width: 250px;
+}
+.accordion-button,.accordion-item{
+	background: #221b18;
+	color: #ffd7ab;
+	font-weight: bold;
+	border: transparent ;
+}
+.carousel{
+	height: 310px;
+}
+.alert{
+	display: none;
+	text-align: center;
+}
+.livre,.ocupada{
+	border: 8px #d4c0a8;
+	border-style: none none double none;
+	margin: 5px;
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	font-size: 22px;
+}
+.livre{
+	background: #6e4d3c;
+}
+.livre:hover{
+	background: #422c20;
+}
+.ocupada{
+	background: #9c8870;
+}
+.ocupada:hover{
+	background: #80715e;
+}
+.listagem{
+	margin: -10px 0 -10px ;
+}
+#botaoStatus{
+    width: 110px;
+	font-size: 14px;
+}
+.adicionar,.remover,.indicadorQuantidade{
+	width: 24px;
+	height: 24px;
+	border: transparent;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+}
+.adicionar{
+	border-radius: 4px;
+	background-color:#9a5833;
+}
+.adicionar:hover {
+	background-color:#874421;
+}
+.remover {
+	border-radius: 4px;
+	background-color: #9a5833;
+}
+.remover:hover {
+	background-color: #874421;
+}
+.indicadorQuantidade{
+	margin: 0 3px 0 3px;
+	border-radius: 4px;
+	background: #cd966c;
+	width: 30px;
+	height: 24px;
+	font-size:16px;
+	text-shadow: 1px 1px #66280a;
+}
+.dropbtn {
+	background-color: #64402e;
+	color: white;
+	font-size: 14px;
+	border: none;
+	height: 35px;
+	border-radius: 6px;
+}
+.dropup {
+	position: relative;
+	display: inline-block;
+}
+.dropup-content {
+	padding: 10px;
+	color: #ffd7ab;
+	display: none;
+	position: absolute;
+	background-color: #64402e;
+	border-radius: 4px;
+	min-width: 250px;
+	bottom: 50px;
+	left: -100px;
+	z-index: 1;
+}
+.dropup:hover .dropup-content {
+	display: block;
+}
+.dropup:hover .dropbtn {
+	background-color: #41291d;
+}
